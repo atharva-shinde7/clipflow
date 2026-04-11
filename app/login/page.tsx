@@ -10,10 +10,12 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [registered, setRegistered] = useState(false)
+  const [passwordReset, setPasswordReset] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     setRegistered(params.get('registered') === '1')
+    setPasswordReset(params.get('reset') === '1')
   }, [])
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -49,6 +51,9 @@ export default function LoginPage() {
         {registered ? (
           <p className="mt-4 text-sm text-accent/80">Account created. You can log in now.</p>
         ) : null}
+        {passwordReset ? (
+          <p className="mt-4 text-sm text-accent/80">Password updated. Sign in with your new password.</p>
+        ) : null}
 
         <form className="mt-6 space-y-4" onSubmit={onSubmit}>
           <input
@@ -58,14 +63,21 @@ export default function LoginPage() {
             placeholder="Email"
             className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
           />
-          <input
-            name="password"
-            type="password"
-            required
-            minLength={6}
-            placeholder="Password"
-            className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
-          />
+          <div className="space-y-2">
+            <input
+              name="password"
+              type="password"
+              required
+              minLength={6}
+              placeholder="Password"
+              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
+            />
+            <div className="text-right">
+              <Link className="text-xs text-white/50 hover:text-accent transition-colors" href="/forgot-password">
+                Forgot password?
+              </Link>
+            </div>
+          </div>
 
           {error ? <p className="text-sm text-red-400">{error}</p> : null}
 
