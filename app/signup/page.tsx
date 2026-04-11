@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
+import PasswordField from '@/components/auth/PasswordField'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -56,13 +57,12 @@ export default function SignupPage() {
             placeholder="Email"
             className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
           />
-          <input
+          <PasswordField
             name="password"
-            type="password"
             required
             minLength={6}
+            autoComplete="new-password"
             placeholder="Password (min 6 chars)"
-            className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
           />
 
           {error ? <p className="text-sm text-red-400">{error}</p> : null}

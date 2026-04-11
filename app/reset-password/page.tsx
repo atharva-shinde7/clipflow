@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FormEvent, Suspense, useState } from 'react'
+import PasswordField from '@/components/auth/PasswordField'
 
 function ResetPasswordForm() {
   const router = useRouter()
@@ -54,23 +55,19 @@ function ResetPasswordForm() {
         <p className="text-sm text-red-400">Invalid or missing link. Request a new reset from the login page.</p>
       ) : null}
 
-      <input
+      <PasswordField
         name="password"
-        type="password"
         required
         minLength={6}
         autoComplete="new-password"
         placeholder="New password (min 6 characters)"
-        className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
       />
-      <input
+      <PasswordField
         name="confirm"
-        type="password"
         required
         minLength={6}
         autoComplete="new-password"
         placeholder="Confirm new password"
-        className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
       />
 
       {error ? <p className="text-sm text-red-400">{error}</p> : null}

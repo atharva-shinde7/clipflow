@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useEffect, useState } from 'react'
 import { signIn } from 'next-auth/react'
+import PasswordField from '@/components/auth/PasswordField'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -64,13 +65,12 @@ export default function LoginPage() {
             className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
           />
           <div className="space-y-2">
-            <input
+            <PasswordField
               name="password"
-              type="password"
               required
               minLength={6}
+              autoComplete="current-password"
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-xl bg-black/30 border border-white/10 outline-none focus:border-accent/60"
             />
             <div className="text-right">
               <Link className="text-xs text-white/50 hover:text-accent transition-colors" href="/forgot-password">
