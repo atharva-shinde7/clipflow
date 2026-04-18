@@ -8,13 +8,16 @@ import { PROJECTS } from './projects'
 
 function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
   const [hovered, setHovered] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLAnchorElement>(null)
 
   return (
-    <div
+    <a
       ref={cardRef}
       className="project-card opacity-0 relative overflow-hidden rounded-2xl cursor-pointer"
       style={{ background: project.bg, minHeight: '260px' }}
+      href={project.instagram}
+      target="_blank"
+      rel="noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -88,21 +91,11 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
         <div className="flex items-center justify-between mt-6">
           <span className="text-sm text-white/40">{project.views}</span>
 
-          {/* Play button reveals on hover */}
-          <div
-            className="flex items-center gap-2 transition-all duration-400"
-            style={{ opacity: hovered ? 1 : 0, transform: hovered ? 'translateX(0)' : 'translateX(10px)' }}
-          >
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center"
-              style={{ background: project.color }}
-            >
-              <svg className="w-4 h-4 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-            <span className="text-xs font-medium text-white/60 tracking-wide">Watch</span>
-          </div>
+          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/25 text-white/70">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5A3.95 3.95 0 0 0 7.75 20.2h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.95 1.55a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z" />
+            </svg>
+          </span>
         </div>
       </div>
 
@@ -116,7 +109,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
           transformOrigin: 'left',
         }}
       />
-    </div>
+    </a>
   )
 }
 
